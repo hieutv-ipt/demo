@@ -1,12 +1,21 @@
 ---
 - name: Check incoming event
-  hosts: all
+  hosts: localhost
   gather_facts: false
   tasks:
-    - name: Show event payload if passed from EDA
+    - name: Show full EDA event
       ansible.builtin.debug:
         var: ansible_eda.event
       ignore_errors: true
+
+    - name: Print demo key
+      ansible.builtin.debug:
+        msg: "demo:{{ ansible_eda.event.payload.demo }}"
+      when:
+        - ansible_eda is defined
+        - ansible_eda.event is defined
+        - ansible_eda.event.payload is defined
+        - ansible_eda.event.payload.demo is defined
 
     - name: Confirm workflow started
       ansible.builtin.debug:
