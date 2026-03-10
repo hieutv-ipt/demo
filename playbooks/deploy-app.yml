@@ -7,3 +7,14 @@
       ansible.builtin.copy:
         dest: /tmp/aap-deployed.txt
         content: "App deployed by AAP workflow\n"
+      delegate_to: localhost
+
+    - name: Show deployed file
+      ansible.builtin.command: cat /tmp/aap-deployed.txt
+      delegate_to: localhost
+      register: deploy_out
+      changed_when: false
+
+    - name: Print deployed content
+      ansible.builtin.debug:
+        var: deploy_out.stdout

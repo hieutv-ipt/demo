@@ -7,3 +7,14 @@
       ansible.builtin.copy:
         dest: /tmp/aap-configured.txt
         content: "Configured by AAP workflow\n"
+      delegate_to: localhost
+
+    - name: Show marker file
+      ansible.builtin.command: cat /tmp/aap-configured.txt
+      delegate_to: localhost
+      register: marker_out
+      changed_when: false
+
+    - name: Print marker content
+      ansible.builtin.debug:
+        var: marker_out.stdout
