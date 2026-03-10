@@ -1,0 +1,9 @@
+---
+- name: Deploy app
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create deployed marker
+      ansible.builtin.copy:
+        dest: /tmp/aap-deployed.txt
+        content: "App deployed by AAP workflow\n"

@@ -1,0 +1,13 @@
+---
+- name: Check incoming event
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Show event payload if passed from EDA
+      ansible.builtin.debug:
+        var: ansible_eda.event
+      ignore_errors: true
+
+    - name: Confirm workflow started
+      ansible.builtin.debug:
+        msg: "Workflow started successfully"

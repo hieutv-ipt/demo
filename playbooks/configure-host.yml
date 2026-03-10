@@ -1,0 +1,9 @@
+---
+- name: Configure host
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Create configured marker
+      ansible.builtin.copy:
+        dest: /tmp/aap-configured.txt
+        content: "Configured by AAP workflow\n"
