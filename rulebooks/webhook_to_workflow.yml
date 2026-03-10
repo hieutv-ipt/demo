@@ -1,15 +1,16 @@
 ---
-- name: Webhook to Controller Workflow
-  hosts: all
+- name: Webhook trigger workflow
+  hosts: localhost
+
   sources:
     - ansible.eda.webhook:
         host: 0.0.0.0
         port: 5000
 
   rules:
-    - name: Launch workflow on webhook event
+    - name: Trigger workflow
       condition: event.payload is defined
       action:
         run_workflow_template:
-          name: "WF-demo-end-to-end"
-          organization: "Default"
+          name: WF-demo-end-to-end
+          organization: Default
